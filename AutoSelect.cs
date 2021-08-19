@@ -3,29 +3,31 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AutoSelect : MonoBehaviour
+namespace JoPires
 {
-    [SerializeField] private bool _isPopupButton;
-    private Selectable _selected;
-
-    private void OnEnable()
+    public class AutoSelect : MonoBehaviour
     {
-        if(_isPopupButton && EventSystem.current != null && EventSystem.current.currentSelectedGameObject != null)
-            _selected = EventSystem.current.currentSelectedGameObject.GetComponent<Selectable>();
+        [SerializeField] private bool _isPopupButton;
+        private Selectable _selected;
 
-        StartCoroutine(SelectButton(GetComponent<Selectable>()));
-    }
+        private void OnEnable()
+        {
+            if(_isPopupButton && EventSystem.current != null && EventSystem.current.currentSelectedGameObject != null)
+                _selected = EventSystem.current.currentSelectedGameObject.GetComponent<Selectable>();
 
-    private void OnDisable()
-    {
-        if(_isPopupButton)
-            _selected?.Select();
-    }
+            StartCoroutine(SelectButton(GetComponent<Selectable>()));
+        }
 
-    private IEnumerator SelectButton(Selectable button)
-    {
-        yield return new WaitForSeconds(.02F);
-        button?.Select();
+        private void OnDisable()
+        {
+            if(_isPopupButton)
+                _selected?.Select();
+        }
+
+        private IEnumerator SelectButton(Selectable button)
+        {
+            yield return new WaitForSeconds(.02F);
+            button?.Select();
+        }
     }
 }
-
