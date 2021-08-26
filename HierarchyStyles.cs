@@ -6,11 +6,6 @@ namespace JoPires
     [InitializeOnLoad]
     public static class HierarchyStyles
     {
-        private static GUIStyle BlackText;
-        private static GUIStyle BlackTextInactive;
-        private static GUIStyle WhiteText;
-        private static GUIStyle WhiteTextInactive;
-
         private static GUIStyle TextColor;
 
         static HierarchyStyles()
@@ -20,17 +15,12 @@ namespace JoPires
 
         private static void initStyle()
         {
-            BlackText = new GUIStyle("PreOverlayLabel") {normal = {textColor = Color.black}};
-            BlackTextInactive = new GUIStyle("PreOverlayLabel") {normal = {textColor = new Color(0, 0, 0, .5F)}};
-            WhiteText = new GUIStyle("PreOverlayLabel") {normal = {textColor = Color.white}};
-            WhiteTextInactive = new GUIStyle("PreOverlayLabel") {normal = {textColor = new Color(1, 1, 1, .5F)}};
-
             TextColor = new GUIStyle("PreOverlayLabel");
         }
 
         public static void ApplyStyles(int instanceID, Rect selectionRect)
         {
-            if (BlackText is null) initStyle();
+            if (TextColor is null) initStyle();
 
             if (!(EditorUtility.InstanceIDToObject(instanceID) is GameObject go)) return;
             if (!go.name.StartsWith("_")) return;
